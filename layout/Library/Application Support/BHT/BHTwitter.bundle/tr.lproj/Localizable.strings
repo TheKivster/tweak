@@ -8,10 +8,7 @@
 
 /*Alerts and popups*/
 "RESTART_REQUIRED_ALERT_TITLE" = "Yeniden başlatma gerekli";
-"RESTART_REQUIRED_ALERT_MESSAGE_CLASSIC_TAB_BAR_GENERIC" = "Bu değişikliğin etkili olması için Twitter'ı yeniden başlatmanız gerekiyor.";
-"RESTART_REQUIRED_ALERT_MESSAGE_SQUARE_AVATARS" = "Bu değişikliği uygulamak için Twitter'ı yeniden başlatmanız gerekiyor.";
-"RESTART_REQUIRED_ALERT_MESSAGE_GENERIC" = "Bu değişikliğin geçerli olması için Twitter'ı yeniden başlatmanız gerekiyor.";
-"RESTART_REQUIRED_ALERT_MESSAGE_NAVBAR" = "Özelleştirilmiş gezinme çubuğunun uygulanması için Twitter'ı yeniden başlatın.";
+"RESTART_REQUIRED_ALERT_MESSAGE" = "Bu değişikliğin geçerli olması için Twitter'ı yeniden başlatmanız gerekiyor.";
 "RESTART_NOW_BUTTON_TITLE" = "Şimdi yeniden başlat";
 "MODERN_LAYOUT_RESTART_MESSAGE" = "Modern ve klasik düzen arasında geçiş yapmak için Twitter'ı yeniden başlatmanız gerekiyor.";
 

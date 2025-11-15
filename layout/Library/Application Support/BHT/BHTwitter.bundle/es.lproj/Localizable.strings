@@ -8,10 +8,7 @@
 
 /*Alerts and popups*/
 "RESTART_REQUIRED_ALERT_TITLE" = "Se requiere reinicio";
-"RESTART_REQUIRED_ALERT_MESSAGE_CLASSIC_TAB_BAR_GENERIC" = "Debes reiniciar Twitter para que este cambio surta efecto.";
-"RESTART_REQUIRED_ALERT_MESSAGE_SQUARE_AVATARS" = "Para aplicar este cambio, debes reiniciar Twitter.";
-"RESTART_REQUIRED_ALERT_MESSAGE_GENERIC" = "Debes reiniciar Twitter para que este cambio surta efecto.";
-"RESTART_REQUIRED_ALERT_MESSAGE_NAVBAR" = "Reinicia Twitter para aplicar tu navegación personalizada.";
+"RESTART_REQUIRED_ALERT_MESSAGE" = "Debes reiniciar Twitter para que este cambio surta efecto.";
 "RESTART_NOW_BUTTON_TITLE" = "Reiniciar ahora";
 "MODERN_LAYOUT_RESTART_MESSAGE" = "Para cambiar entre el diseño moderno y clásico, debes reiniciar Twitter.";
 

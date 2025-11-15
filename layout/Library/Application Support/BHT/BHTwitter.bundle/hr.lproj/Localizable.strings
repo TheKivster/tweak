@@ -8,10 +8,7 @@
 
 /*Alerts and popups*/
 "RESTART_REQUIRED_ALERT_TITLE" = "Potrebno ponovno pokretanje";
-"RESTART_REQUIRED_ALERT_MESSAGE_CLASSIC_TAB_BAR_GENERIC" = "Morate ponovno pokrenuti Twitter da bi promjena stupila na snagu.";
-"RESTART_REQUIRED_ALERT_MESSAGE_SQUARE_AVATARS" = "Za primjenu ove promjene morate ponovno pokrenuti Twitter.";
-"RESTART_REQUIRED_ALERT_MESSAGE_GENERIC" = "Morate ponovno pokrenuti Twitter da bi promjena stupila na snagu.";
-"RESTART_REQUIRED_ALERT_MESSAGE_NAVBAR" = "Ponovno pokrenite Twitter kako bi prilagođena navigacija stupila na snagu.";
+"RESTART_REQUIRED_ALERT_MESSAGE" = "Morate ponovno pokrenuti Twitter da bi promjena stupila na snagu.";
 "RESTART_NOW_BUTTON_TITLE" = "Ponovno pokreni";
 "MODERN_LAYOUT_RESTART_MESSAGE" = "Za prelazak između modernog i klasičnog izgleda morate ponovno pokrenuti Twitter.";
 

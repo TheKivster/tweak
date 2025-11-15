@@ -2751,6 +2751,18 @@ static NSTimer *cookieRetryTimer = nil;
 
 %end
 
+// Helper for the "Replace 'post' with 'Tweet' in notifications" setting
+static BOOL BHNotifReplacePostWithTweetEnabled(void) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    // Fall back to BrandingSettings default (@YES) if the key is missing
+    if ([defaults objectForKey:@"notif_replace_post_with_tweet"] == nil) {
+        return YES;
+    }
+
+    return [defaults boolForKey:@"notif_replace_post_with_tweet"];
+}
+
 %hook TFNAttributedTextView
 - (void)setTextModel:(TFNAttributedTextModel *)model {
     if (!model || !model.attributedString) {
@@ -2762,7 +2774,7 @@ static NSTimer *cookieRetryTimer = nil;
     NSMutableAttributedString *newString = nil;
     BOOL modified = NO;
 
-    // --- Tweet source label coloring (only if enabled) ---
+    // --- Tweet source label coloring ---
     if ([BHTManager RestoreTweetLabels] && tweetSources.count > 0) {
         NSString *unavailable = [[BHTBundle sharedBundle] localizedStringForKey:@"SOURCE_UNAVAILABLE"];
         for (NSString *sourceText in tweetSources.allValues) {
@@ -2793,7 +2805,7 @@ static NSTimer *cookieRetryTimer = nil;
         }
     }
 
-    // --- Notification text replacements (always enabled) ---
+    // --- Notification text replacements ---
     BOOL isNotificationView = NO;
     {
         UIView *view = self;
@@ -2807,7 +2819,7 @@ static NSTimer *cookieRetryTimer = nil;
         }
     }
 
-    if (isNotificationView) {
+    if (isNotificationView && BHNotifReplacePostWithTweetEnabled()) {
         if (!newString) {
             newString = [[NSMutableAttributedString alloc] initWithAttributedString:model.attributedString];
         }
@@ -2930,11 +2942,29 @@ static NSTimer *cookieRetryTimer = nil;
 }
 %end
 
-// MARK: Bird Icon Theming
+// Helper for the Twitter icon theming setting
+static BOOL BHColorTwitterIconEnabled(void) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    // Fall back to the BrandingSettings default (@YES) if the key is missing
+    if ([defaults objectForKey:@"color_twitter_icon_in_top_bar"] == nil) {
+        return YES;
+    }
+
+    return [defaults boolForKey:@"color_twitter_icon_in_top_bar"];
+}
+
+// MARK: Bird Icon Theming, controlled by "color_twitter_icon_in_top_bar"
 
 %hook UIImageView
 
 - (void)setImage:(UIImage *)image {
+    // If the setting is off, keep the original behavior
+    if (!BHColorTwitterIconEnabled()) {
+        %orig(image);
+        return;
+    }
+
     %orig(image);
 
     if (!image) return;
@@ -4317,16 +4347,43 @@ static UIView *findPlayerControlsInHierarchy(UIView *startView) {
 
 %end
 
-// MARK: Change Pill text.
+// Helper for the refresh pill setting
+static BOOL BHPillLabelOverrideEnabled(void) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+    // Fall back to the BrandingSettings default (@YES) if the key is missing
+    if ([defaults objectForKey:@"refresh_pill_label"] == nil) {
+        return YES;
+    }
+
+    return [defaults boolForKey:@"refresh_pill_label"];
+}
+
+// MARK: Change Pill text, controlled by "refresh_pill_label"
 %hook TFNPillControl
+
 - (id)text {
+    if (!BHPillLabelOverrideEnabled()) {
+        // Setting is off, keep original behavior
+        return %orig;
+    }
+
     NSString *localizedText = [[BHTBundle sharedBundle] localizedStringForKey:@"REFRESH_PILL_TEXT"];
-    return localizedText ?: @"Tweeted";
+    NSString *fallback = @"Tweeted";
+    return localizedText ?: fallback;
 }
+
 - (void)setText:(id)arg1 {
+    if (!BHPillLabelOverrideEnabled()) {
+        // Setting is off, pass through original argument
+        return %orig(arg1);
+    }
+
     NSString *localizedText = [[BHTBundle sharedBundle] localizedStringForKey:@"REFRESH_PILL_TEXT"];
-    %orig(localizedText ?: @"Tweeted");
+    NSString *fallback = arg1 ?: @"Tweeted";
+    %orig(localizedText ?: fallback);
 }
+
 %end
 
 // Helper function to check if we're in the T1ConversationContainerViewController hierarchy

@@ -8,10 +8,7 @@
 
 /*Alerts and popups*/
 "RESTART_REQUIRED_ALERT_TITLE" = "Omstart krävs";
-"RESTART_REQUIRED_ALERT_MESSAGE_CLASSIC_TAB_BAR_GENERIC" = "Du måste starta om Twitter för att ändringen ska träda i kraft.";
-"RESTART_REQUIRED_ALERT_MESSAGE_SQUARE_AVATARS" = "Du måste starta om Twitter för att fyrkantiga profilbilder ska börja gälla.";
-"RESTART_REQUIRED_ALERT_MESSAGE_GENERIC" = "Du måste starta om Twitter för att ändringen ska träda i kraft.";
-"RESTART_REQUIRED_ALERT_MESSAGE_NAVBAR" = "Starta om Twitter för att anpassad navigering ska börja gälla.";
+"RESTART_REQUIRED_ALERT_MESSAGE" = "Du måste starta om Twitter för att ändringen ska träda i kraft.";
 "RESTART_NOW_BUTTON_TITLE" = "Starta om nu";
 "MODERN_LAYOUT_RESTART_MESSAGE" = "För att byta mellan modern och klassisk layout måste du starta om Twitter.";
 

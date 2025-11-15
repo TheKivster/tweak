@@ -8,10 +8,7 @@
 
 /*Alerts and popups*/
 "RESTART_REQUIRED_ALERT_TITLE" = "需要重新啟動";
-"RESTART_REQUIRED_ALERT_MESSAGE_CLASSIC_TAB_BAR_GENERIC" = "您需要重新啟動 Twitter 才能使變更生效。";
-"RESTART_REQUIRED_ALERT_MESSAGE_SQUARE_AVATARS" = "要套用此變更，您需要重新啟動 Twitter。";
-"RESTART_REQUIRED_ALERT_MESSAGE_GENERIC" = "您需要重新啟動 Twitter 才能使變更生效。";
-"RESTART_REQUIRED_ALERT_MESSAGE_NAVBAR" = "請重新啟動 Twitter 以套用自訂導覽設定。";
+"RESTART_REQUIRED_ALERT_MESSAGE" = "您需要重新啟動 Twitter 才能使變更生效。";
 "RESTART_NOW_BUTTON_TITLE" = "立即重新啟動";
 "MODERN_LAYOUT_RESTART_MESSAGE" = "要切換現代與經典版面，您需要重新啟動 Twitter。";
 

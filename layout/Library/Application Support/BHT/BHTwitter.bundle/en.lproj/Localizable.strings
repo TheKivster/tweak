@@ -8,15 +8,22 @@
 
 /*Alerts and popups*/
 "RESTART_REQUIRED_ALERT_TITLE" = "Restart required";
-"RESTART_REQUIRED_ALERT_MESSAGE_CLASSIC_TAB_BAR_GENERIC" = "You need to restart Twitter for this change to take effect.";
-"RESTART_REQUIRED_ALERT_MESSAGE_SQUARE_AVATARS" = "To apply this change, you need to restart Twitter";
-"RESTART_REQUIRED_ALERT_MESSAGE_GENERIC" = "You need to restart Twitter for this change to take effect.";
-"RESTART_REQUIRED_ALERT_MESSAGE_NAVBAR" = "You need to restart Twitter for your custom navigation to take effect.";
+"RESTART_REQUIRED_ALERT_MESSAGE" = "You need to restart Twitter for this change to take effect.";
 "RESTART_NOW_BUTTON_TITLE" = "Restart";
+
 "MODERN_LAYOUT_RESTART_MESSAGE" = "To switch between the modern and classic layouts, you need to restart Twitter";
 
 "RESET_COMPLETE_TITLE" = "Reset successful";
 "BACKGROUND_RESET_MESSAGE" = "The Messages background was reset to default.";
+
+"SETTINGS_EXPORT_SUCCESS_TITLE" = "Settings exported";
+"SETTINGS_EXPORT_SUCCESS_MESSAGE" = "Your settings were exported to the NeoFreeBird folder in Files.";
+
+"SETTINGS_IMPORT_SUCCESS_TITLE" = "Settings imported";
+"SETTINGS_IMPORT_SUCCESS_MESSAGE" = "Your settings were imported successfully.";
+
+"SETTINGS_IMPORT_FAILURE_TITLE" = "Import failed";
+"SETTINGS_IMPORT_FAILURE_MESSAGE" = "Could not import settings. The file may be corrupted or incompatible.";
 
 "CONFIRM_ALERT_MESSAGE" = "Sure you meant to do that?";
 "YES_BUTTON_TITLE" = "Yes";
@@ -26,6 +33,39 @@
 "SAVE_BUTTON_TITLE" = "Save";
 
 /*Main menu start*/
+
+/*Settings*/
+
+"MODERN_SETTINGS_LAYOUT_TITLE" = "General";
+"MODERN_SETTINGS_LAYOUT_SUBTITLE" = "Make the timeline truly yours with custom fonts, navigation bar theming, and much more.";
+
+"MODERN_SETTINGS_MEDIA_TITLE" = "Photos and videos";
+"MODERN_SETTINGS_MEDIA_SUBTITLE" = "Download videos, enable video timestamps, and more.";
+
+"MODERN_SETTINGS_TWITTER_BLUE_TITLE" = "Twitter Blue";
+"MODERN_SETTINGS_TWITTER_BLUE_SUBTITLE" = "Get an ad-free experience and unlock Blue features like Undo Tweet, themes, and custom app icons.";
+
+"MODERN_SETTINGS_PROFILES_TITLE" = "Profiles";
+"MODERN_SETTINGS_PROFILES_SUBTITLE" = "Choose what you see on user profiles.";
+
+"MODERN_SETTINGS_TWEETS_TITLE" = "Tweets and replies";
+"MODERN_SETTINGS_TWEETS_SUBTITLE" = "Change the look of tweets and remove features you may not use.";
+
+"MODERN_SETTINGS_MESSAGES_TITLE" = "Messages";
+"MODERN_SETTINGS_MESSAGES_SUBTITLE" = "Customize your Twitter messaging experience.";
+
+"MODERN_SETTINGS_BRANDING_TITLE" = "Branding";
+"MODERN_SETTINGS_BRANDING_SUBTITLE" = "Adjust how much of the Twitter branding reverts you see.";
+
+"MODERN_SETTINGS_EXPERIMENTAL_TITLE" = "Labs";
+"MODERN_SETTINGS_EXPERIMENTAL_SUBTITLE" = "Try features we're currently testing.";
+
+"MODERN_SETTINGS_DEBUG_TITLE" = "Debug";
+"MODERN_SETTINGS_DEBUG_SUBTITLE" = "Find out why something isn't working.";
+
+"COOL_KIDS_SECTION_HEADER_TITLE" = "Cool kids";
+"SPECIAL_THANKS_SECTION_HEADER_TITLE" = "Special thanks";
+"FOLLOW_OFFICIAL_PAGE_SECTION_HEADER_TITLE" = "Follow NeoFreeBird";
 
 /*General*/
 "MAIN_SECTION_HEADER_TITLE" = "General";
@@ -350,7 +390,7 @@
 "COLOR_TWITTER_ICON_DETAIL_TITLE" = "Applies the accent color to the Twitter icon in the top bar.";
 
 "REFRESH_PILL_OPTION_TITLE" = "Add 'Tweeted' to refresh pill";
-"REFRESH_PILL_OPTION_DETAIL_TITLE" = "Adds back the 'Tweeted' label to the refresh pill when someone Tweets. This may (incorrectly) appear in some other areas too.";
+"REFRESH_PILL_DETAIL_TITLE" = "Adds back the 'Tweeted' label to the refresh pill when someone Tweets. This may (incorrectly) appear in some other areas too.";
 
 
 /*Deprecated*/
@@ -371,42 +411,8 @@
 "VOICE_OPTION_TITLE" = "Voice mode";
 "VOICE_OPTION_DETAIL_TITLE" = "Reply to Tweets and replies using your voice.";
 
-/*Modern Settings Layout*/
-
-"MODERN_SETTINGS_LAYOUT_TITLE" = "General";
-"MODERN_SETTINGS_LAYOUT_SUBTITLE" = "Make the timeline truly yours with custom fonts, navigation bar theming, and much more.";
-
-"MODERN_SETTINGS_MEDIA_TITLE" = "Photos and videos";
-"MODERN_SETTINGS_MEDIA_SUBTITLE" = "Download videos, enable video timestamps, and more.";
-
-"MODERN_SETTINGS_TWITTER_BLUE_TITLE" = "Twitter Blue";
-"MODERN_SETTINGS_TWITTER_BLUE_SUBTITLE" = "Get an ad-free experience and unlock Blue features like Undo Tweet, themes, and custom app icons.";
-
-"MODERN_SETTINGS_PROFILES_TITLE" = "Profiles";
-"MODERN_SETTINGS_PROFILES_SUBTITLE" = "Choose what you see on user profiles.";
-
-"MODERN_SETTINGS_TWEETS_TITLE" = "Tweets and replies";
-"MODERN_SETTINGS_TWEETS_SUBTITLE" = "Change the look of tweets and remove features you may not use.";
-
-"MODERN_SETTINGS_MESSAGES_TITLE" = "Messages";
-"MODERN_SETTINGS_MESSAGES_SUBTITLE" = "Customize your Twitter messaging experience.";
-
-"MODERN_SETTINGS_BRANDING_TITLE" = "Branding";
-"MODERN_SETTINGS_BRANDING_SUBTITLE" = "Adjust how much of the Twitter branding reverts you see.";
-
-"MODERN_SETTINGS_EXPERIMENTAL_TITLE" = "Labs";
-"MODERN_SETTINGS_EXPERIMENTAL_SUBTITLE" = "Try features we're currently testing.";
-
-"MODERN_SETTINGS_DEBUG_TITLE" = "Debug";
-"MODERN_SETTINGS_DEBUG_SUBTITLE" = "Find out why something isn't working.";
-
-"COOL_KIDS_SECTION_HEADER_TITLE" = "Cool kids";
-"SPECIAL_THANKS_SECTION_HEADER_TITLE" = "Special thanks";
-"FOLLOW_OFFICIAL_PAGE_SECTION_HEADER_TITLE" = "Follow NeoFreeBird";
-
 "MODERN_SETTINGS_PLACEHOLDER_TEXT" = "Nothing to see here - yet";
 "MODERN_SETTINGS_PLACEHOLDER_DETAIL_TEXT" = "We aren't currently testing any new features. Check back later!";
-
 
 "SOURCE_UNAVAILABLE" = "Source Unavailable";
 

@@ -8,10 +8,7 @@
 
 /*Alerts and popups*/
 "RESTART_REQUIRED_ALERT_TITLE" = "Требуется перезапуск";
-"RESTART_REQUIRED_ALERT_MESSAGE_CLASSIC_TAB_BAR_GENERIC" = "Необходимо перезапустить Twitter, чтобы изменения вступили в силу.";
-"RESTART_REQUIRED_ALERT_MESSAGE_SQUARE_AVATARS" = "Чтобы применить это изменение, перезапустите Twitter.";
-"RESTART_REQUIRED_ALERT_MESSAGE_GENERIC" = "Необходимо перезапустить Twitter, чтобы изменения вступили в силу.";
-"RESTART_REQUIRED_ALERT_MESSAGE_NAVBAR" = "Перезапустите Twitter, чтобы применить изменения в навигации.";
+"RESTART_REQUIRED_ALERT_MESSAGE" = "Необходимо перезапустить Twitter, чтобы изменения вступили в силу.";
 "RESTART_NOW_BUTTON_TITLE" = "Перезапустить";
 "MODERN_LAYOUT_RESTART_MESSAGE" = "Чтобы переключаться между современным и классическим макетом, перезапустите Twitter.";
 

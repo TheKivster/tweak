@@ -8,10 +8,7 @@
 
 /*Alerts and popups*/
 "RESTART_REQUIRED_ALERT_TITLE" = "Neustart erforderlich";
-"RESTART_REQUIRED_ALERT_MESSAGE_CLASSIC_TAB_BAR_GENERIC" = "Twitter muss neu gestartet werden, damit diese Änderung wirksam wird.";
-"RESTART_REQUIRED_ALERT_MESSAGE_SQUARE_AVATARS" = "Um diese Änderung anzuwenden, muss Twitter neu gestartet werden.";
-"RESTART_REQUIRED_ALERT_MESSAGE_GENERIC" = "Twitter muss neu gestartet werden, damit diese Änderung wirksam wird.";
-"RESTART_REQUIRED_ALERT_MESSAGE_NAVBAR" = "Starte Twitter neu, um deine benutzerdefinierte Navigation zu aktivieren.";
+"RESTART_REQUIRED_ALERT_MESSAGE" = "Twitter muss neu gestartet werden, damit diese Änderung wirksam wird.";
 "RESTART_NOW_BUTTON_TITLE" = "Jetzt neu starten";
 "MODERN_LAYOUT_RESTART_MESSAGE" = "Um zwischen modernem und klassischem Layout zu wechseln, muss Twitter neu gestartet werden.";
 

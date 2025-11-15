@@ -3,10 +3,7 @@
 
 /*Alerts and popups*/
 "RESTART_REQUIRED_ALERT_TITLE" = "Wymagane ponowne uruchomienie";
-"RESTART_REQUIRED_ALERT_MESSAGE_CLASSIC_TAB_BAR_GENERIC" = "Aby zmiana zaczęła działać, musisz ponownie uruchomić Twittera.";
-"RESTART_REQUIRED_ALERT_MESSAGE_SQUARE_AVATARS" = "Aby zastosować tę zmianę, musisz ponownie uruchomić Twittera.";
-"RESTART_REQUIRED_ALERT_MESSAGE_GENERIC" = "Aby zmiana zaczęła działać, musisz ponownie uruchomić Twittera.";
-"RESTART_REQUIRED_ALERT_MESSAGE_NAVBAR" = "Aby zastosować własną nawigację, musisz ponownie uruchomić Twittera.";
+"RESTART_REQUIRED_ALERT_MESSAGE" = "Aby zmiana zaczęła działać, musisz ponownie uruchomić Twittera.";
 "RESTART_NOW_BUTTON_TITLE" = "Uruchom ponownie";
 "MODERN_LAYOUT_RESTART_MESSAGE" = "Aby przełączać się między nowym i klasycznym układem, musisz ponownie uruchomić Twittera.";
 
