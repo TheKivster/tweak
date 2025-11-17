@@ -1,18 +1,22 @@
-# NeoFreeBird-BHTwitter
-the ultimate way to tweak your Twitter/X experience.
+<div align="center">
+    <img src="icon_rounded.png" alt="NeoFreeBird-BHTwitter" width="130" height="130">
+ 
+  # NeoFreeBird-BHTwitter (tweak)
+  <i>The brain behind NeoFreeBird (app)</i>
 
-> Forked from [BHTwitter](https://github.com/BandarHL/BHTwitter).
-
-## Disclaimer: 
-these builds are considered beta. even though they should work fine. you may run into some unintended issues, especially with untested twitter/x versions.
+  <p>
+   The ultimate way to tweak your Twitter/X experience.
+  </p>
+</div>
+<br>
 
 | | | |
 |:-------------------------:|:-------------------------:|:-------------------------:|
 |<img width="1604" alt="Screenshot 1" src="1.png">|<img width="1604" alt="Screenshot 2" src="2.png">|<img width="1604" alt="Screenshot 3" src="3.png">|
 
-# How to Build
+# Compiling NeoFreeBird-BHTwitter
 
-## Build Locally
+## Using your computer
 
 1. Install [Theos](https://github.com/theos/theos).
 2. Install [cyan](https://github.com/asdfzxcvbn/pyzule-rw) if you want sideload or TrollStore builds.
@@ -37,13 +41,14 @@ chmod +x ./build.sh
 
 Available options:
 ```
---sideloaded: For sideloading.
---rootless: For rootless jailbreaks.
---trollstore: For TrollStore users.
-(no option): For rootful jailbreaks.
+--sideloaded: for sideloading.
+--trollstore: for TrollStore users.
+--rootless: for rootless jailbreaks.
+--rootfull: for rootful jailbreaks.
+--help: for help
 ```
 
-## Build via GitHub Actions
+## Using GitHub Actions
 
 1. Fork this repository.
 2. Open the "Actions" tab and enable workflows.
@@ -54,7 +59,7 @@ Available options:
    - Any value for rootful/rootless builds.
 5. Check the "Releases" tab once the build completes.
 
-# Build Examples
+# Examples
 
 ## Build for Sideloading
 
@@ -79,7 +84,7 @@ Result: `NeoFreeBird-trollstore.tipa` inside `packages`.
 
 ## Build for Rootless Jailbreaks
 
-Simply run:
+Just run:
 
 ```bash
 ./build.sh --rootless
@@ -89,10 +94,10 @@ Result: `com.bandarhl.bhtwitter_4.2_iphoneos-arm64.deb` inside `packages`.
 
 ## Build for Rootful Jailbreaks
 
-Just run the script without any flags:
+Just run:
 
 ```bash
-./build.sh
+./build.sh --rootfull
 ```
 
 Result: `com.bandarhl.bhtwitter_4.2_iphoneos-arm.deb` inside `packages`.
