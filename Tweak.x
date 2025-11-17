@@ -668,7 +668,7 @@ static inline UIImage *BHTVectorIcon(NSString *name, CGFloat size) {
 
 static inline NSString *BHTIconNameForKey(NSString *key) {
     if ([key isEqualToString:@"button"])   return @"copy_stroke";
-    if ([key isEqualToString:@"bio"])      return @"cards";
+    if ([key isEqualToString:@"bio"])      return @"news_stroke";
     if ([key isEqualToString:@"username"]) return @"at";
     if ([key isEqualToString:@"fullname"]) return @"account";
     if ([key isEqualToString:@"url"])      return @"link";

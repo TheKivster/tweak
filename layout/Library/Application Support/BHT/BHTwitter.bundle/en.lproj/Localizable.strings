@@ -14,15 +14,6 @@
 "RESET_COMPLETE_TITLE" = "Reset successful";
 "BACKGROUND_RESET_MESSAGE" = "The Messages background was reset to default.";
 
-"SETTINGS_EXPORT_SUCCESS_TITLE" = "Settings exported";
-"SETTINGS_EXPORT_SUCCESS_MESSAGE" = "Your settings were exported to the NeoFreeBird folder in Files.";
-
-"SETTINGS_IMPORT_SUCCESS_TITLE" = "Settings imported";
-"SETTINGS_IMPORT_SUCCESS_MESSAGE" = "Your settings were imported successfully.";
-
-"SETTINGS_IMPORT_FAILURE_TITLE" = "Import failed";
-"SETTINGS_IMPORT_FAILURE_MESSAGE" = "Could not import settings. The file may be corrupted or incompatible.";
-
 "CONFIRM_ALERT_MESSAGE" = "Sure you meant to do that?";
 "YES_BUTTON_TITLE" = "Yes";
 "NO_BUTTON_TITLE" = "No";
@@ -31,6 +22,7 @@
 "SAVE_BUTTON_TITLE" = "Save";
 "RESTART_NOW_BUTTON_TITLE" = "Restart";
 "NOT_NOW_BUTTON_TITLE" = "Not now";
+"CONTINUE_BUTTON_TITLE" = "Continue";
 
 /*Main menu start*/
 
@@ -53,6 +45,15 @@
 
 "MODERN_SETTINGS_MESSAGES_TITLE" = "Messages";
 "MODERN_SETTINGS_MESSAGES_SUBTITLE" = "Customize your Twitter messaging experience.";
+
+"MODERN_SETTINGS_SEARCH_TITLE" = "Search and discover";
+"MODERN_SETTINGS_SEARCH_SUBTITLE" = "Change what you see in the Search tab.";
+
+"MODERN_SETTINGS_PRESETS_TITLE" = "Presets";
+"MODERN_SETTINGS_PRESETS_SUBTITLE" = "Apply a set of pre-configured settings, or export and import your own.";
+
+"MODERN_SETTINGS_WEB_TITLE" = "Web and links";
+"MODERN_SETTINGS_WEB_SUBTITLE" = "Adjust how links and Twitter's in-app browser behave.";
 
 "MODERN_SETTINGS_BRANDING_TITLE" = "Branding";
 "MODERN_SETTINGS_BRANDING_SUBTITLE" = "Adjust how much of the Twitter branding reverts you see.";
@@ -392,6 +393,26 @@
 "REFRESH_PILL_OPTION_TITLE" = "Add 'Tweeted' to refresh pill";
 "REFRESH_PILL_DETAIL_TITLE" = "Adds back the 'Tweeted' label to the refresh pill when someone Tweets. This may (incorrectly) appear in some other areas too.";
 
+/*Presets*/
+
+"PRESETS_IMPORT_SUCCESS_TITLE" = "Import successful";
+"PRESETS_IMPORT_SUCCESS_MESSAGE" = "Your preset was imported successfully.";
+
+"PRESETS_IMPORT_FAILURE_TITLE" = "Import failed";
+"PRESETS_IMPORT_FAILURE_MESSAGE" = "The preset file is invalid or corrupted.";
+
+"PRESETS_EXPORT_SUCCESS_TITLE" = "Export successful";
+"PRESETS_EXPORT_SUCCESS_MESSAGE" = "Your preset was exported successfully.";
+
+"PRESETS_EXPORT_FAILURE_TITLE" = "Export failed";
+"PRESETS_EXPORT_FAILURE_MESSAGE" = "There was an error exporting your preset.";
+
+"PRESETS_APPLY_SUCCESS_TITLE" = "Preset applied";
+"PRESETS_APPLY_SUCCESS_MESSAGE" = "The preset was applied successfully.";
+
+"PRESETS_APPLY_FAILURE_TITLE" = "Coudn't apply preset";
+"PRESETS_APPLY_FAILURE_MESSAGE" = "There was an error applying the preset.";
+
 
 /*Deprecated*/
 "TRUSTED_FRIENSS_OPTION_TITLE" = "Twitter Circles";
@@ -412,7 +433,7 @@
 "VOICE_OPTION_DETAIL_TITLE" = "Reply to Tweets and replies using your voice.";
 
 "MODERN_SETTINGS_PLACEHOLDER_TEXT" = "Nothing to see here - yet";
-"MODERN_SETTINGS_PLACEHOLDER_DETAIL_TEXT" = "We aren't currently testing any new features. Check back later!";
+"MODERN_SETTINGS_PLACEHOLDER_DETAIL_TEXT" = "This section is coming soon. Stay tuned for more NeoFreeBird features!";
 
 "SOURCE_UNAVAILABLE" = "Source Unavailable";
 

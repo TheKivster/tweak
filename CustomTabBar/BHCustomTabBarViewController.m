@@ -332,16 +332,16 @@ static UIFont *TwitterChirpFont(TwitterFontStyle style) {
 #pragma mark - Reset Logic
 
 - (void)resetSettingsBarButtonHandler:(UIBarButtonItem *)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@""
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"CUSTOM_TAB_BAR_RESET_BUTTON"]
                                                                    message:[[BHTBundle sharedBundle] localizedStringForKey:@"CUSTOM_TAB_BAR_RESET_MESSAGE"]
                                                             preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"YES_BUTTON_TITLE"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alert addAction:[UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"CONTINUE_BUTTON_TITLE"] style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"allowed"];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"hidden"];
         [self loadData];
         [self persistChanges];
     }]];
-    [alert addAction:[UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"NO_BUTTON_TITLE"] style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"CANCEL_BUTTON_TITLE"] style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
