@@ -108,12 +108,12 @@
 "FOLLOW_CONFIRM_OPTION_DETAIL_TITLE" = "Fråga innan du följer någon.";
 
 "COPY_PROFILE_INFO_OPTION_TITLE" = "Kopiera profilinfo";
-"COPY_PROFILE_INFO_OPTION_DETAIL_TITLE" = "Kopiera användarnamn, bio och mer med ett tryck.";
+"COPY_PROFILE_INFO_OPTION_DETAIL_TITLE" = "Kopiera användarnamn, biografier, och mer med ett tryck.";
 
-"BIO_TRANSLATE_OPTION_TITLE" = "Översätt bio";
+"BIO_TRANSLATE_OPTION_TITLE" = "Översätt biografi";
 "BIO_TRANSLATE_OPTION_DETAIL_TITLE" = "Se biografier på ditt språk.";
 
-"DISABLE_MEDIA_TAB_OPTION_TITLE" = "Ingen separat Medieflik";
+"DISABLE_MEDIA_TAB_OPTION_TITLE" = "Separera inte Mediafilken";
 "DISABLE_MEDIA_TAB_OPTION_DETAIL_TITLE" = "Slår ihop Foto- och Videoflikarna.";
 
 "DISABLE_ARTICLES_OPTION_TITLE" = "Ingen Artiklar-flik";
