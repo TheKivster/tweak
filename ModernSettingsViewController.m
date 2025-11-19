@@ -549,9 +549,10 @@ static UIFont *TwitterChirpFont(TwitterFontStyle style) {
     Class TAEColorSettingsCls = objc_getClass("TAEColorSettings");
     id settings = [TAEColorSettingsCls sharedSettings];
     id colorPalette = [[settings currentColorPalette] colorPalette];
+    UIColor *titleColor = [colorPalette performSelector:@selector(textColor)];
     UIColor *subtitleColor = [colorPalette performSelector:@selector(tabBarItemColor)];
 
-    titleLabel.textColor = subtitleColor;
+    titleLabel.textColor = titleColor;
     detailLabel.textColor = subtitleColor;
 
     UIStackView *stack = [[UIStackView alloc] initWithArrangedSubviews:@[titleLabel, detailLabel]];
@@ -565,8 +566,8 @@ static UIFont *TwitterChirpFont(TwitterFontStyle style) {
     [NSLayoutConstraint activateConstraints:@[
         [stack.leadingAnchor constraintEqualToAnchor:header.leadingAnchor constant:20],
         [stack.trailingAnchor constraintEqualToAnchor:header.trailingAnchor constant:-20],
-        [stack.topAnchor constraintEqualToAnchor:header.topAnchor constant:8],
-        [stack.bottomAnchor constraintEqualToAnchor:header.bottomAnchor constant:-8]
+        [stack.topAnchor constraintEqualToAnchor:header.topAnchor constant:16],
+        [stack.bottomAnchor constraintEqualToAnchor:header.bottomAnchor constant:-16]
     ]];
 
     return header;

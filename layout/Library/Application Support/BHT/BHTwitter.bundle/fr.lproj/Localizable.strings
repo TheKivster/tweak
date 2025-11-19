@@ -83,7 +83,7 @@
 "SQUARE_AVATARS_DETAIL_TITLE" = "Affiche des photos de profil carrées pour tout le monde, comme les comptes de marque sur l'ancien Twitter.";
 
 "REPLY_SORTING_TITLE" = "Pas de tri des réponses";
-"REPLY_SORTING_DETAIL_TITLE" = "Désactive le tri des réponses dans les conversations de tweets.";
+"REPLY_SORTING_DETAIL_TITLE" = "Désactive le tri des réponses dans les conversations de Tweets.";
 
 "RESTORE_REPLY_CONTEXT_TITLE" = "Restaurer le contexte de réponse";
 "RESTORE_REPLY_CONTEXT_DETAIL_TITLE" = "Affiche les personnes auxquelles la réponse est adressée sous les Tweets.";
@@ -363,7 +363,7 @@
 "MODERN_SETTINGS_PROFILES_SUBTITLE" = "Modifiez ce que vous voyez dans les profils.";
 
 "MODERN_SETTINGS_TWEETS_TITLE" = "Tweets et réponses";
-"MODERN_SETTINGS_TWEETS_SUBTITLE" = "Modifiez le fonctionnement des tweets et désactivez les fonctions inutiles.";
+"MODERN_SETTINGS_TWEETS_SUBTITLE" = "Modifiez le fonctionnement des Tweets et désactivez les fonctions inutiles.";
 
 "MODERN_SETTINGS_MESSAGES_TITLE" = "Messages";
 "MODERN_SETTINGS_MESSAGES_SUBTITLE" = "Personnalisez votre expérience de messagerie Twitter.";
