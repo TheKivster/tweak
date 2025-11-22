@@ -17,6 +17,7 @@
 #import "SAMKeychain/AuthViewController.h"
 #import "Colours/Colours.h"
 #import "BHTManager.h"
+#import "BHDimPalette.h"
 #import <math.h>
 #import "BHTBundle/BHTBundle.h"
 #import "TWHeaders.h"
@@ -677,16 +678,121 @@ static inline NSString *BHTIconNameForKey(NSString *key) {
     return @"copy_stroke";
 }
 
+#pragma mark - Theme detection and style helpers
+
+typedef NS_ENUM(NSInteger, BHTTwitterThemeVariant) {
+    BHTTwitterThemeVariantLight = 0,
+    BHTTwitterThemeVariantDim   = 1,
+    BHTTwitterThemeVariantBlack = 2, // Lights out / pure black
+};
+
+// Decide between Light / Dim / Lights out using BHDimPalette for dim.
+static BHTTwitterThemeVariant BHTCurrentTwitterThemeVariant(T1ProfileHeaderView *headerView) {
+    UIUserInterfaceStyle style = UIUserInterfaceStyleLight;
+
+    if (headerView && @available(iOS 13.0, *)) {
+        style = headerView.traitCollection.userInterfaceStyle;
+    }
+
+    // System / Twitter light theme
+    if (style == UIUserInterfaceStyleLight) {
+        return BHTTwitterThemeVariantLight;
+    }
+
+    // Dark family: use BHDimPalette to distinguish Dim from Lights out.
+    if ([BHDimPalette isDimMode]) {
+        return BHTTwitterThemeVariantDim;
+    }
+
+    // Dark but not dim -> Lights out (black).
+    return BHTTwitterThemeVariantBlack;
+}
+
+// Style using the logged RGBA values for each theme.
+static void BHTApplyCopyButtonStyle(UIButton *copyButton, T1ProfileHeaderView *headerView) {
+    if (!copyButton) return;
+
+    BHTTwitterThemeVariant variant = BHTCurrentTwitterThemeVariant(headerView);
+
+    copyButton.layer.cornerRadius = 16.0;
+    copyButton.layer.masksToBounds = YES;
+    copyButton.layer.borderWidth = 1.0;
+    copyButton.backgroundColor = nil;
+
+    switch (variant) {
+        case BHTTwitterThemeVariantLight: {
+            // Light mode logs:
+            // tint:   0.000 0.533 1.000
+            // border: 0.812 0.851 0.871
+            copyButton.tintColor = [UIColor colorWithRed:0.000f
+                                                   green:0.533f
+                                                    blue:1.000f
+                                                   alpha:1.0f];
+            copyButton.layer.borderColor = [UIColor colorWithRed:0.812f
+                                                           green:0.851f
+                                                            blue:0.871f
+                                                           alpha:1.0f].CGColor;
+            break;
+        }
+
+        case BHTTwitterThemeVariantDim: {
+            // Dim mode logs:
+            // tint:   0.000 0.569 1.000
+            // border: 0.259 0.325 0.392
+            copyButton.tintColor = [UIColor colorWithRed:0.000f
+                                                   green:0.569f
+                                                    blue:1.000f
+                                                   alpha:1.0f];
+            copyButton.layer.borderColor = [UIColor colorWithRed:0.259f
+                                                           green:0.325f
+                                                            blue:0.392f
+                                                           alpha:1.0f].CGColor;
+            break;
+        }
+
+        case BHTTwitterThemeVariantBlack: {
+            // Lights out logs:
+            // tint:   0.000 0.569 1.000
+            // border: 0.200 0.212 0.224
+            copyButton.tintColor = [UIColor colorWithRed:0.000f
+                                                   green:0.569f
+                                                    blue:1.000f
+                                                   alpha:1.0f];
+            copyButton.layer.borderColor = [UIColor colorWithRed:0.200f
+                                                           green:0.212f
+                                                            blue:0.224f
+                                                           alpha:1.0f].CGColor;
+            break;
+        }
+    }
+}
+
+#pragma mark - Hook
+
 %hook T1ProfileHeaderViewController
 
 - (void)viewDidAppear:(_Bool)arg1 {
     %orig(arg1);
-    if ([BHTManager CopyProfileInfo]) {
-        T1ProfileHeaderView *headerView = [self valueForKey:@"_headerView"];
-        UIView *innerContentView = [headerView.actionButtonsView valueForKey:@"_innerContentView"];
 
-        UIButton *copyButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [copyButton setImage:BHTVectorIcon(BHTIconNameForKey(@"button"), 18.0) forState:UIControlStateNormal];
+    if (![BHTManager CopyProfileInfo]) {
+        return;
+    }
+
+    T1ProfileHeaderView *headerView = [self valueForKey:@"_headerView"];
+    if (!headerView || ![headerView respondsToSelector:@selector(actionButtonsView)]) {
+        return;
+    }
+
+    UIView *actionButtonsView = headerView.actionButtonsView;
+    UIView *innerContentView = [actionButtonsView valueForKey:@"_innerContentView"];
+    if (!innerContentView) innerContentView = actionButtonsView;
+
+    // Reuse if it already exists.
+    UIButton *copyButton = (UIButton *)[actionButtonsView viewWithTag:9001];
+    if (!copyButton) {
+        copyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [copyButton setImage:BHTVectorIcon(BHTIconNameForKey(@"button"), 18.0)
+                    forState:UIControlStateNormal];
         copyButton.tag = 9001;
 
         if (@available(iOS 14.0, *)) {
@@ -729,18 +835,16 @@ static inline NSString *BHTIconNameForKey(NSString *key) {
 
             [copyButton setMenu:[UIMenu menuWithTitle:@"" children:@[fullname, username, bio, location, url]]];
         } else {
-            [copyButton addTarget:self action:@selector(copyButtonHandler:) forControlEvents:UIControlEventTouchUpInside];
+            [copyButton addTarget:self
+                           action:@selector(copyButtonHandler:)
+                 forControlEvents:UIControlEventTouchUpInside];
         }
 
-        [copyButton setTintColor:UIColor.labelColor];
-        [copyButton.layer setCornerRadius:32.0/2.0];
-        [copyButton.layer setBorderWidth:1.0];
-        [copyButton.layer setBorderColor:[UIColor colorFromHexString:@"2F3336"].CGColor];
-        [copyButton setTranslatesAutoresizingMaskIntoConstraints:false];
-        [headerView.actionButtonsView addSubview:copyButton];
+        copyButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [actionButtonsView addSubview:copyButton];
 
         [NSLayoutConstraint activateConstraints:@[
-            [copyButton.centerYAnchor constraintEqualToAnchor:headerView.actionButtonsView.centerYAnchor],
+            [copyButton.centerYAnchor constraintEqualToAnchor:actionButtonsView.centerYAnchor],
             [copyButton.widthAnchor constraintEqualToConstant:32.0],
             [copyButton.heightAnchor constraintEqualToConstant:32.0],
         ]];
@@ -754,28 +858,51 @@ static inline NSString *BHTIconNameForKey(NSString *key) {
                 [copyButton.trailingAnchor constraintEqualToAnchor:innerContentView.leadingAnchor constant:-7.0],
             ]];
         }
+    } else {
+        [copyButton setImage:BHTVectorIcon(BHTIconNameForKey(@"button"), 18.0)
+                    forState:UIControlStateNormal];
     }
+
+    // Style for current theme.
+    BHTApplyCopyButtonStyle(copyButton, headerView);
 }
 
 %new - (void)copyButtonHandler:(UIButton *)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"hi" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"hi"
+                                                                   message:nil
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
     if (is_iPad()) {
         alert.popoverPresentationController.sourceView = self.view;
         alert.popoverPresentationController.sourceRect = sender.frame;
     }
-    UIAlertAction *fullname = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_3"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+    UIAlertAction *fullname = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_3"]
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
         if (self.viewModel.fullName != nil) UIPasteboard.generalPasteboard.string = self.viewModel.fullName;
     }];
-    UIAlertAction *username = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_2"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+    UIAlertAction *username = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_2"]
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
         if (self.viewModel.username != nil) UIPasteboard.generalPasteboard.string = self.viewModel.username;
     }];
-    UIAlertAction *bio = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_1"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+    UIAlertAction *bio = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_1"]
+                                                  style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction * _Nonnull action) {
         if (self.viewModel.bio != nil) UIPasteboard.generalPasteboard.string = self.viewModel.bio;
     }];
-    UIAlertAction *location = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_5"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+    UIAlertAction *location = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_5"]
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
         if (self.viewModel.location != nil) UIPasteboard.generalPasteboard.string = self.viewModel.location;
     }];
-    UIAlertAction *url = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_4"] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+    UIAlertAction *url = [UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_4"]
+                                                  style:UIAlertActionStyleDefault
+                                                handler:^(UIAlertAction * _Nonnull action) {
         if (self.viewModel.url != nil) UIPasteboard.generalPasteboard.string = self.viewModel.url;
     }];
 
@@ -792,47 +919,68 @@ static inline NSString *BHTIconNameForKey(NSString *key) {
     [alert addAction:bio];
     [alert addAction:location];
     [alert addAction:url];
-    [alert addAction:[UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"CANCEL_BUTTON_TITLE"] style:UIAlertActionStyleCancel handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"CANCEL_BUTTON_TITLE"]
+                                              style:UIAlertActionStyleCancel
+                                            handler:nil]];
     [self presentViewController:alert animated:true completion:nil];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
     %orig(previousTraitCollection);
-    if ([BHTManager CopyProfileInfo]) {
-        T1ProfileHeaderView *headerView = [self valueForKey:@"_headerView"];
-        UIButton *copyButton = (UIButton *)[headerView.actionButtonsView viewWithTag:9001];
-        if (copyButton) {
-            [copyButton setImage:BHTVectorIcon(BHTIconNameForKey(@"button"), 18.0) forState:UIControlStateNormal];
-            if (@available(iOS 14.0, *)) {
-                UIAction *fullname = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_3"]
-                                                         image:BHTVectorIcon(BHTIconNameForKey(@"fullname"), 16.0)
-                                                    identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-                    if (self.viewModel.fullName != nil) UIPasteboard.generalPasteboard.string = self.viewModel.fullName;
-                }];
-                UIAction *username = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_2"]
-                                                         image:BHTVectorIcon(BHTIconNameForKey(@"username"), 16.0)
-                                                    identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-                    if (self.viewModel.username != nil) UIPasteboard.generalPasteboard.string = self.viewModel.username;
-                }];
-                UIAction *bio = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_1"]
-                                                    image:BHTVectorIcon(BHTIconNameForKey(@"bio"), 16.0)
-                                               identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-                    if (self.viewModel.bio != nil) UIPasteboard.generalPasteboard.string = self.viewModel.bio;
-                }];
-                UIAction *location = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_5"]
-                                                         image:BHTVectorIcon(BHTIconNameForKey(@"location"), 16.0)
-                                                    identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-                    if (self.viewModel.location != nil) UIPasteboard.generalPasteboard.string = self.viewModel.location;
-                }];
-                UIAction *url = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_4"]
-                                                      image:BHTVectorIcon(BHTIconNameForKey(@"url"), 16.0)
-                                                 identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-                    if (self.viewModel.url != nil) UIPasteboard.generalPasteboard.string = self.viewModel.url;
-                }];
-                [copyButton setMenu:[UIMenu menuWithTitle:@"" children:@[fullname, username, bio, location, url]]];
-            }
-        }
+
+    if (![BHTManager CopyProfileInfo]) {
+        return;
     }
+
+    T1ProfileHeaderView *headerView = [self valueForKey:@"_headerView"];
+    if (!headerView || ![headerView respondsToSelector:@selector(actionButtonsView)]) {
+        return;
+    }
+
+    UIButton *copyButton = (UIButton *)[headerView.actionButtonsView viewWithTag:9001];
+    if (!copyButton) {
+        return;
+    }
+
+    [copyButton setImage:BHTVectorIcon(BHTIconNameForKey(@"button"), 18.0)
+                forState:UIControlStateNormal];
+
+    if (@available(iOS 14.0, *)) {
+        UIAction *fullname = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_3"]
+                                                 image:BHTVectorIcon(BHTIconNameForKey(@"fullname"), 16.0)
+                                            identifier:nil
+                                               handler:^(__kindof UIAction * _Nonnull action) {
+            if (self.viewModel.fullName != nil) UIPasteboard.generalPasteboard.string = self.viewModel.fullName;
+        }];
+        UIAction *username = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_2"]
+                                                 image:BHTVectorIcon(BHTIconNameForKey(@"username"), 16.0)
+                                            identifier:nil
+                                               handler:^(__kindof UIAction * _Nonnull action) {
+            if (self.viewModel.username != nil) UIPasteboard.generalPasteboard.string = self.viewModel.username;
+        }];
+        UIAction *bio = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_1"]
+                                            image:BHTVectorIcon(BHTIconNameForKey(@"bio"), 16.0)
+                                       identifier:nil
+                                          handler:^(__kindof UIAction * _Nonnull action) {
+            if (self.viewModel.bio != nil) UIPasteboard.generalPasteboard.string = self.viewModel.bio;
+        }];
+        UIAction *location = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_5"]
+                                                 image:BHTVectorIcon(BHTIconNameForKey(@"location"), 16.0)
+                                            identifier:nil
+                                               handler:^(__kindof UIAction * _Nonnull action) {
+            if (self.viewModel.location != nil) UIPasteboard.generalPasteboard.string = self.viewModel.location;
+        }];
+        UIAction *url = [UIAction actionWithTitle:[[BHTBundle sharedBundle] localizedStringForKey:@"COPY_PROFILE_INFO_MENU_OPTION_4"]
+                                            image:BHTVectorIcon(BHTIconNameForKey(@"url"), 16.0)
+                                       identifier:nil
+                                          handler:^(__kindof UIAction * _Nonnull action) {
+            if (self.viewModel.url != nil) UIPasteboard.generalPasteboard.string = self.viewModel.url;
+        }];
+        [copyButton setMenu:[UIMenu menuWithTitle:@"" children:@[fullname, username, bio, location, url]]];
+    }
+
+    // Reapply style so border/tint match the updated theme.
+    BHTApplyCopyButtonStyle(copyButton, headerView);
 }
 
 %end
